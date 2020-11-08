@@ -99,7 +99,7 @@ var triviaGame = {
       var correct = (triviaGame.qaArray[questionCount].correct);
 
       var happyGif = $("<img>").attr("src", gifArray[gifPick]);
-      var sadGif = $("<img>").attr("src", "");
+      var sadGif = $("<img>").attr("src", "Assets/sadd-bill.gif");
 
 
 
