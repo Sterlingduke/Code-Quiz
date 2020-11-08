@@ -44,3 +44,47 @@ button {
 .lead {
     font-size: 32px;
 }
+#question {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 36px;
+} 
+
+#score, #result {
+    margin: 10px;
+    font-size: 24px;
+    background: rgb(54, 207, 24);
+    color: black;
+    padding: 10px;
+    display:inline-block;
+    border-width: 3px;
+    border-style: groove;
+    border-color:magenta;
+}
+
+#game, #resultBox {
+    display: none;
+}
+
+#timer {
+    margin: 10px;
+    font-size: 48px;
+    background: rgb(0, 0, 0);
+    color: rgb(22, 223, 66);
+    padding: 10px;
+    display:inline-block;
+    border-width: 3px;
+    border-style: groove;
+    border-color: magenta;;
+}
+
+.play:hover { 
+    background-color:rgb(22, 223, 66);
+    color: magenta;;
+}
+
+.answer-btn:hover { 
+    background-color:magenta;;
+    color: rgb(22, 223, 66);
+}
