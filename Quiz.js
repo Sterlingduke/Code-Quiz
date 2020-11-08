@@ -15,7 +15,7 @@ var questionCount = 0;
 var score = 0;
 var gifPick = Math.floor(Math.random() * 5);
 
-var gifArray = ['Code-Quiz/Assets/ddd.gif',]
+var gifArray = ["Assets/ddd.gif","Assets/dab-bill.gif","Assets/bill-arm.gif","Assets/happy steve.gif","Assets/steve-jobs.gif"]
 
 var triviaGame = {
 
@@ -61,4 +61,119 @@ var triviaGame = {
       answers: ["Steve", "Bill", "Tim", "Equal"],
       correct: "Equal",
     }
+  ],
+
+  startGame: function() {
+    questionCount = 0;
+    score = 0;
+    if (!clockRunning) {
+      intervalId = setInterval(triviaGame.count, 1000);
+      clockRunning = true;
+    }
+
+    $("#intro").hide();
+    $("#game").show();
+    $("#question").text(triviaGame.qaArray[questionCount].question);
+    triviaGame.renderAnswers();
+    $("#scoreBox").text("Score: " + score);
+
+  },
+
+  renderAnswers: function() {
+
+    $("#answers").empty();
+    for (var i = 0; i < 4; i++) {
+      var a = $("<button>");
+      a.addClass("answer-btn");
+      a.attr("data-name", triviaGame.qaArray[questionCount].answers[i]);
+      a.text(triviaGame.qaArray[questionCount].answers[i]);
+      $("#answers").append(a); 
+    }
+  },
+
+  checkAnswer: function() {
+
+      triviaGame.random();
+
+      var answer = $(this).attr("data-name");
+      var correct = (triviaGame.qaArray[questionCount].correct);
+
+      var happyGif = $("<img>").attr("src", gifArray[gifPick]);
+      var sadGif = $("<img>").attr("src", "");
+
+
+
+      if (answer === correct){
+        score++;
+        $("#scoreBox").text("Score: " + score);
+        $("#result").append(happyGif);
+        $("#game").hide();
+        $("#resultBox").show();
+        $("#resultText").text("Nice!");
+       
+        time=3;
+      }
+      else {
+        $("#result").append(sadGif);
+        $("#game").hide();
+        $("#resultBox").show();
+        $("#resultText").text("Geez! The answer is "+ correct +".");
+       
+      }
+    },
+
+  nextQuestion: function() {
+
+    if (questionCount === 9){
+      triviaGame.stopGame();
+    }
+    else {
+    $("#result").empty();
+    $("#resultBox").hide();
+    $("#game").show();
+    questionCount++;
+    $("#question").text(triviaGame.qaArray[questionCount].question);
+    triviaGame.renderAnswers();
+    }
+  },
+
+  stopGame: function() {
+    $("#game").hide();
+    $(".lead").text("You're "+score+"0% correct.")
+    $("#intro").show();
+    $("#result").empty();
+    $("#resultBox").hide();
+    $(".play").text("Play again.");
+    $(".play").on("click", triviaGame.startGame);
+  },
+
+  count: function() {  
+
+      time--;
+      $("#timer").text("00:0" + time);
+      if (time === 0) {
+        time = 10;
+        triviaGame.nextQuestion();
+      }
+    },
+
+  reset: function() {
+      time = 0;
+      $("#timer").text("00:0" + time);
+      clearInterval(intervalId);
+      clockRunning = false;
+  
+    },
+
+    random: function() {
+      gifPick = Math.floor(Math.random() * 6);
+    },
+  
+};
+
+
+// Adding a click event listener to all elements with a class of "answer-btn"
+$(document).on("click", ".answer-btn", triviaGame.random);
+$(document).on("click", ".answer-btn", triviaGame.checkAnswer);
+
   
