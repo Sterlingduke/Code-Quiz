@@ -9,6 +9,7 @@ This quiz game shows only one question until the player answers it or their time
 * On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
 
 # live Link
+https://sterlingduke.github.io/Code-Quiz/
 
 
 # Technologies Used
@@ -17,6 +18,7 @@ HTML
 CSS
 
 # License
+MIT
 
 
 
